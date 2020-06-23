@@ -1,6 +1,9 @@
 import numpy as np
 from filterpy.kalman import KalmanFilter
+import matplotlib.pyplot as plt
 from filterpy.common import Q_discrete_white_noise
+from filterpy.stats import plot_covariance_ellipse
+
 
 def preprocess(num_measured, measured_var, covar, process_model, white_noise_var, dt, sensor_covar, measurement_function, B=0, U=0):
 
@@ -46,5 +49,24 @@ def run_kf(data, dim_of_measurements, measured_var, covar, process_model, white_
         cv.append(kf.P)
 
     xs, cv = np.array(xs), np.array(cv)
-    return xs, cv
+    return xs, cv, kf
+
+def run_smoother(kf, xs, ps):
+    x, P, K, Pp = kf.rts_smoother(Xs=xs, Ps=ps)
+    return x, P
+
+def visualise(x, y, x_real, x_messy):
+    plt.figure(figsize=(10,10))
+    plt.plot(range(1, len(x)+1), x[:, 0], c='r', label='Smoothed data')
+    plt.plot(range(1, len(x_messy) + 1), x_messy, '--o', c='g', label='Noisy Measurement')
+    plt.plot(range(1, len(x_real) + 1), x_real, '--o', c='royalblue', label='True position')
+    # plt.plot(range(1, len(x)+1), cv, c='r', label='Smoothed data')
+
+    plt.legend()
+    plt.title('RTS Smoother')
+    plt.show()
+    return
+
+
+
 
