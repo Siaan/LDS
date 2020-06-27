@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import numpy as np
 from filterpy.kalman import KalmanFilter
 import matplotlib.pyplot as plt
@@ -18,18 +19,18 @@ def preprocess(num_measured, measured_var, covar, process_model, white_noise_var
            measured_var = (10,4.5)
     :param covar: Covariance matrix of all state variables
            For example: if the variance of x = 500 and dx = 49 and the correlation is unknown
-           covar = (500,0),(0,49)
+           covar = ((500,0),(0,49))
     :param process_model: Transition matrix for process
            For example: The relationship between x and dx is: x'  = 1* x + (dt) dx  where dt = 0.1
                                                               dx' = 0* x + (1)  dx (for our purposes)
-           Then the transition matrix (1, 0.1), (0, 1)
+           Then process_model= ((1, 0.1), (0, 1))
     :param white_noise_var: Variance of noise in process (float)
     :param dt: time step (in seconds)
     :param sensor_covar: Variance in sensor measurement (noise)
            For example: If only one sensor is used to measure x
            sensor_covar = (5)
            If two sensors are used to measure x and dx
-           sensor_covar = (5,0),(0,2)
+           sensor_covar = (5,0),(0,2) etc
     :param measurement_function: Converts state to measurement
            For example: if the measurement is x from the sensor but the state variable is x and dx
            then in matrix form : x - [1 0] [x, dx] = x - x
@@ -121,6 +122,9 @@ def visualise(x, y, x_messy, x_real=None):
     plt.title('RTS Smoother')
     plt.show()
     return
+
+if __name__ == '__main__':
+    print('No Errors')
 
 
 
