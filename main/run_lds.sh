@@ -1,8 +1,9 @@
 #!/bin/bash
 ## Import functions for workflow management
 ## Get the path to this function:
+
 execpath="$0"
-echo execpath
+echo $execpath
 scriptpath="$neurocaasrootdir/ncap_utils"
 
 
@@ -37,15 +38,15 @@ source activate lds
 
 
 userhome="/home/ubuntu" #declaring variables
-datastore="lds/main/localdata/" #declaring variables
-configstore="lds/main/localconfig/" #declaring variables
+datastore="NeuroCAAS/LDS_algo/LDS/main/localdata/" #declaring variables
+configstore="NeuroCAAS/LDS_algo/LDS/main/localconfig/" #declaring variables
 #outstore="epi/scripts/data/lds_2D_linear2D_freq/" #declaring variables
-outstore="lds/main/data/" #declaring variables
+outstore="NeuroCAAS/LDS_algo/LDS/main/data/" #declaring variables
 ## Make local storage locations
 accessdir "$userhome/$datastore" "$userhome/$configstore" "$userhome/$outstore" #initializing local storage locations
 
 
-## Stereotyped download script for data. The only reason this comes after something custom is because we depend upon the AWS CLI and installed credentials.
+## Stereotyped download script for data.
 download "$inputpath" "$bucketname" "$datastore" #downloading data to immutable analysis environment
 
 ## Stereotyped download script for config:
@@ -56,9 +57,9 @@ configname=$(python $neurocaasrootdir/ncap_utils/yamltojson.py "$userhome"/"$con
 
 ###############################################################################################
 ## Custom bulk processing.
-cd lds/main # going to script directory
+cd NeuroCAAS/LDS_algo/LDS/main # going to script directory
 
-bash clean_KF.sh "$userhome"/"$datastore""$dataname" # script in EPI to run EPI optimization for given random seed.
+bash clean_KF.sh "$userhome"/"$datastore""$dataname" #????
 
 export resultsstore="data/results" # export result directory.
 
