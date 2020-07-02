@@ -4,7 +4,7 @@ from filterpy.kalman import KalmanFilter
 import matplotlib.pyplot as plt
 from filterpy.common import Q_discrete_white_noise
 from filterpy.stats import plot_covariance_ellipse
-
+import process_files
 
 def preprocess(num_measured, measured_var, covar, process_model, white_noise_var, dt, sensor_covar, measurement_function, B=0, U=0):
     '''
@@ -124,7 +124,30 @@ def visualise(x, y, x_messy, x_real=None):
     return
 
 if __name__ == '__main__':
-    print('No Errors')
+    bucketname = sys.argv[1]
+    configname = sys.argv[2]
+    configstore = sys.argv[3]
+
+    input_file = sys.argv[4]
+    output_loc = sys.argv[5]
+
+    dim_of_measurements, measured_var, covar, process_model, \
+    white_noise_var, dt, sensor_covar, \
+    measurement_function = process_files.process_parameters(configname)
+
+    zedd = process_files.process_data_file(input_file)
+
+    xs, cv, kf = Kalman.run_kf(data=zedd, dim_of_measurements=1, measured_var=(10, 4.5), covar=((500, 0), (0, 49)),
+                               process_model=((1, 1), (0, 1)), white_noise_var=.35, dt=1, sensor_covar=(5),
+                               measurement_function=(1, 0))
+
+    x, p = Kalman.run_smoother(kf, xs, cv)
+
+    process_files.process_output(x,p, output_loc)
+
+
+
+    #Kalman.visualise(x, p, zedd, real)
 
 
 
