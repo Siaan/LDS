@@ -46,6 +46,7 @@ def process_output(x,p, output_loc):
 
 
 if __name__ == '__main__':
+    print('No Errors')
 
 
 
