@@ -10,7 +10,6 @@ import pandas
 import clean_KF as Kalman
 
 def process_parameters(configname):
-
     configparams = yaml.load(open(configname, 'r'), Loader=yaml.FullLoader)
     try:
         dim_of_measurements = configparams["dim_of_measurements"]
@@ -36,12 +35,9 @@ def process_data_file(dataname):
 
 def process_output(x,p, output_loc):
     output_df = pd.DataFrame()
-    output_df[x] = x
-    output_df[p] = p
-    output_df.to_csv(r'output_loc', index=False)
-    return output_df
-
-
+    output_df["X"] = x
+    output_df["P"] = p
+    output_df.to_csv(output_loc, index=False, columns=['X', 'P'])
 
 
 
