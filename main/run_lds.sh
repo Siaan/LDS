@@ -41,10 +41,10 @@ source activate lds
 
 
 userhome="/home/ubuntu" #declaring variables
-datastore="NeuroCAAS/LDS_algo/LDS/main/localdata/" #declaring variables
-configstore="NeuroCAAS/LDS_algo/LDS/main/localconfig/" #declaring variables
+datastore="LDS/main/localdata/" #declaring variables
+configstore="LDS/main/localconfig/" #declaring variables
 #outstore="epi/scripts/data/lds_2D_linear2D_freq/" #declaring variables
-outstore="NeuroCAAS/LDS_algo/LDS/main/data/" #declaring variables
+outstore="LDS/main/data/" #declaring variables
 
 
 ## Make local storage locations
@@ -65,7 +65,7 @@ configname=$(python $neurocaasrootdir/ncap_utils/yamltojson.py "$userhome"/"$con
 cd NeuroCAAS/LDS_algo/LDS/main # going to script directory
 
 
-python clean_KF.py "$bucketname" "$userhome/$configstore/$configname" "$userhome/$configstore" "$userhome/$datastore/$dataname" "$userhome/$outstore"
+python clean_KF.py "$userhome/$configstore/$configname" "$userhome/$configstore" "$userhome/$datastore/$dataname" "$userhome/$outstore"
 
 export resultsstore="data/results" # export result directory.
 
