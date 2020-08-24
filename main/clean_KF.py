@@ -153,19 +153,9 @@ if __name__ == '__main__':
 
     zedd = process_files.process_data_file(input_file)
     print('Fix input file')
-    zedd = np.array([4.17197561e-02, 3.36094565e-01, 1.14028557e+00, 4.28742903e+00,
-       3.30744063e+00, 6.89663337e+00, 7.51347466e+00, 1.20059191e+01,
-       1.14448224e+01, 1.08740637e+01, 1.61330056e+01, 1.94657043e+01,
-       2.51070035e+01, 2.54517682e+01, 2.72877374e+01, 3.05620723e+01,
-       3.41261823e+01, 3.44303358e+01, 3.46201621e+01, 3.67364526e+01,
-       3.71211458e+01, 3.79088621e+01, 4.22119101e+01, 4.32963577e+01,
-       4.69181788e+01, 4.57875465e+01, 4.93112172e+01, 5.29318405e+01,
-       4.56350204e+01, 4.84020090e+01, 5.23703885e+01, 4.65453156e+01,
-       5.21367163e+01, 5.24388904e+01, 4.84826511e+01, 5.00181579e+01,
-       5.43086723e+01, 5.58124473e+01, 6.11665810e+01, 6.21288593e+01,
-       6.40973611e+01, 6.90132057e+01, 6.40802668e+01, 6.64637220e+01,
-       6.67268861e+01, 6.59644116e+01, 7.09311354e+01, 7.20214809e+01,
-       7.57663112e+01, 7.35669676e+01]) 
+    print(zedd)
+    print('original input')
+
     xs, cv, kf = run_kf(data=zedd, dim_of_measurements=dim_of_measurements, measured_var=(measured_var), covar=(covar),
                                process_model=(process_model), white_noise_var=white_noise_var, dt=dt, sensor_covar=(sensor_covar),
                                measurement_function=(measurement_function))
@@ -176,12 +166,13 @@ if __name__ == '__main__':
     final_x = []
     for i in x:
         final_x.append(list(flatten(i)))
-
+    
+    print(final_x)
     print('type: ', type(final_x))
     print('FINAL_X', final_x[0])
     print(final_x[0][0])
     print(type(p))
-    print('==============+P============', p[0])
+   # print('==============+P============', p[0])
 
 
     process_files.process_output(final_x,p, output_loc)
