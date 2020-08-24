@@ -29,8 +29,8 @@ def process_parameters(configname):
     return dim_of_measurements, measured_var, covar, process_model, white_noise_var, dt, sensor_covar, measurement_function
 
 def process_data_file(dataname):
-    df = pandas.read_csv(dataname)
-    zedd = np.array(df)
+    df = pd.read_csv(dataname)
+    zedd = df.Observations.to_numpy()
 
     return zedd
 
