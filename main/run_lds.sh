@@ -50,8 +50,11 @@ errorlog_background &
 background_pid=$!
 echo $background_pid, "is the pid of the background process"
 
+export PATH="/home/ubuntu/venv/project/bin:$PATH"
+
+source activate
 #environment setup
-export PATH="/home/ubuntu/anaconda3/bin:$PATH"
+export PATH="/home/ubuntu/NeuroCAAS/LDS_algo/LDS/main:$PATH"
 echo "$PATH"
 
 #source activate lds
